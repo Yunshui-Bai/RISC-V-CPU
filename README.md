@@ -1,5 +1,6 @@
 # Project_rv: tiny_risc_v_cpu by [liangkangnan](https://gitee.com/liangkangnan/tinyriscv)
 tinyriscv_soc_top.v 结构分析
+```
 // tinyriscv soc顶层模块 - 内核连接外设
     // tinyriscv处理器核模块例化
     tinyriscv u_tinyriscv(.clk(clk),.rst(rst),.rib_ex_addr_o(m0_addr_i),.rib_ex_data_i(m0_data_o),.rib_ex_data_o(m0_data_i),.rib_ex_req_o(m0_req_i),.rib_ex_we_o(m0_we_i),.rib_pc_addr_o(m1_addr_i),.rib_pc_data_i(m1_data_o),.jtag_reg_addr_i(jtag_reg_addr_o),.jtag_reg_data_i(jtag_reg_data_o),.jtag_reg_we_i(jtag_reg_we_o),.jtag_reg_data_o(jtag_reg_data_i),.rib_hold_flag_i(rib_hold_flag_o),.jtag_halt_flag_i(jtag_halt_req_o),.jtag_reset_flag_i(jtag_reset_req_o),.int_i(int_flag));
@@ -74,21 +75,16 @@ tinyriscv_soc_top.v 结构分析
 测试1500条指令，验证了暂停，跳转，和pc+4的功能   
 编译指令：make comp  仿真： ./simv -gui 查看覆盖率：make cov
 测试结果：` Compare SUCCESSFULLY`![pc_reg verdi](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/caf51375-3e60-4b11-bdac-3061459955b9)
-
 代码覆盖率：![pc_reg coverage1](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/a9f026a6-bdd3-4eb9-a68b-e1901847841d)
-
 条件覆盖率为2/3是一条|语句未完全判断   
 功能覆盖率：![pc_reg coverage2](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/bf9dd63a-8b4e-4bff-a070-aa3cffbaa0d5)
 rst，jump，hold，inst addr 均为100%；   
 #### regs 通用寄存器
 测试了优先级判断，寄存器读写（含零寄存器5'b0），jtag的寄存器读写操作     
-结果比较方法：`result = (get_actual.jdata===tmp_tran.jdata)&&(get_actual.data===tmp_tran.data);//包含不定态，要用===`    
+结果比较方法：`result = (get_actual.jdata===tmp_tran.jdata)&&(get_actual.data===tmp_tran.data);//包含不定态，要用===`   
 测试结果： ` Compare SUCCESSFULLY` ![regs verdi](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/cda34a22-c2f2-41e4-af91-71f07a5cbdfb)
-
 代码覆盖率：![regs coverage1](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/6613e90e-d6a8-4010-b2c9-3ef6fad7feb2)
-
 功能覆盖率：![regs coverage2](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/22485eb0-5561-4012-a31b-a7f54b923e1b)
-
 #### div
 测试了除法模块有符号除法，无符号除法，有符号求余数，无符号求余数四种运算
 测试结果： ` Compare SUCCESSFULLY` ![div verdi](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/aabb122d-c2d6-4465-a246-07d241b07050)
