@@ -74,7 +74,7 @@ tinyriscv_soc_top.v 结构分析
 ##### pc寄存器 
 测试1500条指令，验证了暂停，跳转，和pc+4的功能   
 编译指令：make comp  仿真： ./simv -gui 查看覆盖率：make cov
-测试结果：` Compare SUCCESSFULLY`![pc_reg verdi](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/de04513b-85f6-4a46-bf61-a1a77dcb5970)
+测试结果：` Compare SUCCESSFULLY`![pc_reg verdi](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/2ca99ab0-3975-43c5-b846-053b20342440)
 代码覆盖率：![pc_reg coverage1](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/04b99446-85f5-40d4-baca-e31f5d597873)
 条件覆盖率为2/3是一条|语句未完全判断   
 功能覆盖率：![pc_reg coverage2](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/b45ad65b-23ce-47d0-aa5a-131d9cbb5e07)
