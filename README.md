@@ -1,7 +1,7 @@
 # Project_rv: tiny_risc_v_cpu by [liangkangnan](https://gitee.com/liangkangnan/tinyriscv)
 tinyriscv_soc_top.v 结构分析
 ```
-//core核结构
+##core核结构
 ![1](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/4e70b6bf-6ab7-46a7-bc35-2bc51020e965)
 // tinyriscv soc顶层模块 - 内核连接外设
     // tinyriscv处理器核模块例化
