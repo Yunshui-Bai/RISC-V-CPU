@@ -54,7 +54,6 @@ tinyriscv_soc_top.v 结构分析
 
     // jtag模块例化
     jtag_top #(.DMI_ADDR_BITS(6),.DMI_DATA_BITS(32),.DMI_OP_BITS(2)) u_jtag_top(.clk(clk),.jtag_rst_n(rst),.jtag_pin_TCK(jtag_TCK),.jtag_pin_TMS(jtag_TMS),.jtag_pin_TDI(jtag_TDI),.jtag_pin_TDO(jtag_TDO),.reg_we_o(jtag_reg_we_o),.reg_addr_o(jtag_reg_addr_o),.reg_wdata_o(jtag_reg_data_o),.reg_rdata_i(jtag_reg_data_i),.mem_we_o(m2_we_i),.mem_addr_o(m2_addr_i),.mem_wdata_o(m2_data_i),.mem_rdata_i(m2_data_o),.op_req_o(m2_req_i),.halt_req_o(jtag_halt_req_o),.reset_req_o(jtag_reset_req_o));
-![1](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/b8461b28-9c8d-484d-b905-01e9ba890b8c)
 
 
 
@@ -81,13 +80,13 @@ tinyriscv_soc_top.v 结构分析
 条件覆盖率为2/3是一条|语句未完全判断   
 功能覆盖率：![pc_reg coverage2](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/bf9dd63a-8b4e-4bff-a070-aa3cffbaa0d5)
 rst，jump，hold，inst addr 均为100%；   
-#### regs 通用寄存器
+##### regs 通用寄存器
 测试了优先级判断，寄存器读写（含零寄存器5'b0），jtag的寄存器读写操作     
 结果比较方法：`result = (get_actual.jdata===tmp_tran.jdata)&&(get_actual.data===tmp_tran.data);//包含不定态，要用===`   
 测试结果： ` Compare SUCCESSFULLY` ![regs verdi](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/cda34a22-c2f2-41e4-af91-71f07a5cbdfb)
 代码覆盖率：![regs coverage1](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/6613e90e-d6a8-4010-b2c9-3ef6fad7feb2)
 功能覆盖率：![regs coverage2](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/22485eb0-5561-4012-a31b-a7f54b923e1b)
-#### div
+##### div
 测试了除法模块有符号除法，无符号除法，有符号求余数，无符号求余数四种运算
 测试结果： ` Compare SUCCESSFULLY` ![div verdi](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/aabb122d-c2d6-4465-a246-07d241b07050)
 代码覆盖率：![div coverage](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/67d62e09-44c7-41ed-bf1f-63415ca237c9)
