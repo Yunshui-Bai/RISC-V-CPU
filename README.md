@@ -82,8 +82,11 @@ rst，jump，hold，inst addr 均为100%；
 测试了优先级判断，寄存器读写（含零寄存器5'b0），jtag的寄存器读写操作     
 结果比较方法：`result = (get_actual.jdata===tmp_tran.jdata)&&(get_actual.data===tmp_tran.data);//包含不定态，要用===`    
 测试结果： ` Compare SUCCESSFULLY` ![regs verdi](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/cda34a22-c2f2-41e4-af91-71f07a5cbdfb)
+
 代码覆盖率：![regs coverage1](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/6613e90e-d6a8-4010-b2c9-3ef6fad7feb2)
+
 功能覆盖率：![regs coverage2](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/22485eb0-5561-4012-a31b-a7f54b923e1b)
+
 #### div
 测试了除法模块有符号除法，无符号除法，有符号求余数，无符号求余数四种运算
 测试结果： ` Compare SUCCESSFULLY` ![div verdi](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/aabb122d-c2d6-4465-a246-07d241b07050)
