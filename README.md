@@ -1,4 +1,3 @@
-![1](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/9896a7c8-0fb8-47ec-8913-ebff2cbb3afd)![core coverage](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/bd3cf93e-ea23-4eeb-aad0-062479b85428)
 # Project_rv: tiny_risc_v_cpu by [liangkangnan](https://gitee.com/liangkangnan/tinyriscv)
 tinyriscv_soc_top.v 结构分析
 ![1](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/53817905-79c6-4746-a64a-d383a0711fe8)
