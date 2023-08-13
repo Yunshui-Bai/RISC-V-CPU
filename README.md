@@ -1,4 +1,4 @@
-
+![core coverage](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/bd3cf93e-ea23-4eeb-aad0-062479b85428)
 # Project_rv: tiny_risc_v_cpu by [liangkangnan](https://gitee.com/liangkangnan/tinyriscv)
 tinyriscv_soc_top.v 结构分析
 ```
@@ -74,32 +74,34 @@ tinyriscv_soc_top.v 结构分析
 #### core部分
 ##### pc寄存器 
 测试1500条指令，验证了暂停，跳转，和pc+4的功能   
-编译指令：make comp  仿真： ./simv -gui 查看覆盖率：make cov    
-代码覆盖率：![image](https://user-images.githubusercontent.com/41823230/181457407-6f0ba203-851e-48e1-b192-470741600fcd.png)
+编译指令：make comp  仿真： ./simv -gui 查看覆盖率：make cov
+测试结果：` Compare SUCCESSFULLY`![pc_reg verdi](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/de04513b-85f6-4a46-bf61-a1a77dcb5970)
+代码覆盖率：![pc_reg coverage1](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/04b99446-85f5-40d4-baca-e31f5d597873)
 条件覆盖率为2/3是一条|语句未完全判断   
-功能覆盖率：![image](https://user-images.githubusercontent.com/41823230/181457512-4f16c88f-fdc1-4e64-82c8-293ece9af197.png)
+功能覆盖率：![pc_reg coverage2](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/b45ad65b-23ce-47d0-aa5a-131d9cbb5e07)
 rst，jump，hold，inst addr 均为100%；   
 #### regs 通用寄存器
 测试了优先级判断，寄存器读写（含零寄存器5'b0），jtag的寄存器读写操作     
 结果比较方法：`result = (get_actual.jdata===tmp_tran.jdata)&&(get_actual.data===tmp_tran.data);//包含不定态，要用===`    
-测试结果： ` Compare SUCCESSFULLY` ![@`J7BRQXJ5 PO)A_P%@LR3R](https://user-images.githubusercontent.com/41823230/181702991-d1764697-4da9-485b-8bf3-c4d998941783.png)
-代码覆盖率：![image](https://user-images.githubusercontent.com/41823230/181703091-bf25ec7c-761f-4cbc-8db5-5bb461f02319.png)
-功能覆盖率：![image](https://user-images.githubusercontent.com/41823230/181703168-842f4638-f1fc-4f5c-b875-53e824166ee4.png)
-##### tiny_cpu
+测试结果： ` Compare SUCCESSFULLY` ![regs verdi](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/cda34a22-c2f2-41e4-af91-71f07a5cbdfb)
+代码覆盖率：![regs coverage1](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/6613e90e-d6a8-4010-b2c9-3ef6fad7feb2)
+功能覆盖率：![regs coverage2](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/22485eb0-5561-4012-a31b-a7f54b923e1b)
+#### div
+测试了除法模块有符号除法，无符号除法，有符号求余数，无符号求余数四种运算
+测试结果： ` Compare SUCCESSFULLY` ![div verdi](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/aabb122d-c2d6-4465-a246-07d241b07050)
+代码覆盖率：![div coverage](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/67d62e09-44c7-41ed-bf1f-63415ca237c9)
+功能覆盖率：![div coverage2](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/51b4f8cb-66d9-4195-b372-597ab842dc23)
+###### tiny_cpu
 只测试指令执行和pc跳转功能 有两种思路：    
-
 1.在transaction中直接生成随机指令      
 会生成大量非法指令，很难达到覆盖率要求，例如使用15000条随机指令，代码覆盖率仅有60%，状态机覆盖率更是只有35%，所以有必要开发一个随机指令合法生成平台    
-![image](https://user-images.githubusercontent.com/41823230/183327205-f30a2a0d-5ee2-4a75-a484-a86c5466f040.png)
-
+![core coverage](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/0ae7f55c-9e55-4e95-b23e-aedb3945af1f)
 2.搭建随机指令生成平台
 使用instr_gen平台生成可配置的指令流，包括RV32im全部55条指令，可配置各种指令的占比。     
 使用指令生成平台控制指令，仅产生1500条指令便可达到很高的覆盖率(各指令权重均为1)，图中clint覆盖率较低是因为未考虑各种中断，而非指令不全：    
-![image](https://user-images.githubusercontent.com/41823230/183412675-306e3ea0-17c3-4356-a007-36dc32dbd996.png)
-![image](https://user-images.githubusercontent.com/41823230/183412741-4b408ed2-fb06-4381-9f78-b77e2cd43923.png)
-仅测试add指令：   
+![core coverage1](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/7cd039fc-7208-4d30-a6bd-498b97e5d138)
+![core coverage2](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/fd3f2fab-0e99-47b4-8630-e233b6e5ae90)
 
-![image](https://user-images.githubusercontent.com/41823230/183413368-2f2e47cb-6bf6-4d0a-8fd7-6bd0e6afcc2d.png)
 
 
 
