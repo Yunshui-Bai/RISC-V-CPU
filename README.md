@@ -4,7 +4,7 @@
 ```
           32bits RV32I基础整数指令集(47条) 扩展硬件乘法器：(R) : mul mulh mulhsu mulhu div divu rem remu
           R: func-7      rs2-5 rs1-5 func-3  rd-5         opcode-7  寄存器-寄存器操作   add sub sll slt sltu xor srl sra or and 
-          I: imm-12            rs1-5 func-3  rd-5         opcode-7  短立即数计算和访存load  lb lh lw lbu lhu addi slti sltiu xori ori andi fence fence.i ecall ebreak csrrw csrrs csrrc csrrwi cssrrsi csrrci
+          I: imm-12            rs1-5 func-3  rd-5         opcode-7  短立即数计算和访存  load lb lh lw lbu lhu addi slti sltiu xori ori andi fence fence.i ecall ebreak csrrw csrrs csrrc csrrwi cssrrsi csrrci
           S: imm-7       rs2-5 rs1-5 func-3  imm-5        opcode-7  访存store           sb sh sw 
           B: imm-1 imm-6 rs2-5 rs1-5 func-3  imm-4 imm-1  opcode-7  条件跳转            beq bne blt bge bltu bgeu
           U: imm-20                          rd-5         opcode-7  长立即数            lui auipc
