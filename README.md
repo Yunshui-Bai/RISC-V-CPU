@@ -1,4 +1,4 @@
-![1](https://github.com/Yunshui-Bai/RISC-V-CPU/assets/141251120/20a262eb-c455-40f8-882f-c853ca4aedfc)# RISC-V project
+# FPGA-project
     项目结构RISC-V project
            ├── design
            │   ├── core
@@ -157,8 +157,6 @@ tinyriscv_soc_top.v 结构分析
 
 
 ```
-<div align="center"><img src="(https://github.com/Yunshui-Bai/RISC-V-CPU/assets/141251120/eee0b231-c733-49b5-8bea-9b9375e5a583"  width="50%"></img><br><div align="center">原理图(详看大图)</div></div>
-<br>
 
 
 
