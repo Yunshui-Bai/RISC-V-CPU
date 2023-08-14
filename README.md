@@ -1,4 +1,3 @@
-![1](https://github.com/Yunshui-Bai/RISC-V-CPU/assets/141251120/ac47c288-4379-410f-b9f1-ed48213eaa24)# Project_rv: tiny_risc_v_cpu by [liangkangnan](https://gitee.com/liangkangnan/tinyriscv)
 ## 设计部分
 设计需求：三级流水线，即取指，译码，执行，支持RV32IM指令集等  rv内容参见 [rv中文手册](http://riscvbook.com/chinese/RISC-V-Reader-Chinese-v2p1.pdf)
 ```
@@ -83,7 +82,7 @@ module tinyriscv(
 
 ---
 tinyriscv_soc_top.v 结构分析
-<div align="center"><img src="https://github.com/Yunshui-Bai/RISC-V-CPU/assets/141251120/6ea795f5-6619-496d-a778-3cabd99d9f42"  width="100%"></img><br><div align="center">原理图(详看大图)</div></div>
+<div align="center"><img src="https://github.com/Yunshui-Bai/RISC-V-CPU/assets/141251120/6ea795f5-6619-496d-a778-3cabd99d9f42"  width="100%"></img><br><div align="center">原理图(详看大图)</div></div><br>
 ```
 // tinyriscv soc顶层模块 - 内核连接外设
     // tinyriscv处理器核模块例化
