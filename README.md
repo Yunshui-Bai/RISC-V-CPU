@@ -11,6 +11,8 @@
           J: imm-1 imm-10 imm-1 imm-8        rd-5         opcode-7  无条件跳转          jal jalr
 ```
 tinyriscv.v 结构分析
+### 整体框图
+![1](https://github.com/Yunshui-Bai/RISC-V-CPU/assets/141251120/68236994-68a4-4659-8603-3b9815cd1ae9)
 ```
 // tinyriscv处理器核顶层模块
 module tinyriscv(
@@ -83,8 +85,6 @@ module tinyriscv(
 
 ---
 tinyriscv_soc_top.v 结构分析
-###整体框图
-![1](https://github.com/Yunshui-Bai/RISC-V-CPU/assets/141251120/68236994-68a4-4659-8603-3b9815cd1ae9)
 ```
 // tinyriscv soc顶层模块 - 内核连接外设
     // tinyriscv处理器核模块例化
