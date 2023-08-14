@@ -1,4 +1,4 @@
-# FPGA-project
+# RISC-V project
     项目结构RISC-V project
            ├── design
            │   ├── core
