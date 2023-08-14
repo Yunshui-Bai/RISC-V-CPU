@@ -166,6 +166,7 @@ tinyriscv_soc_top.v 结构分析
 
 
 
+
 ## 验证部分
 ### core部分
 #### pc寄存器 
