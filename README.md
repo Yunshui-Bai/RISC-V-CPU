@@ -89,6 +89,9 @@ module tinyriscv(
     clint u_clint(.clk(clk),.rst(rst),.int_flag_i(if_int_flag_o),.inst_i(id_inst_o),.inst_addr_i(id_inst_addr_o),.jump_flag_i(ex_jump_flag_o),.jump_addr_i(ex_jump_addr_o),.hold_flag_i(ctrl_hold_flag_o),.div_started_i(ex_div_start_o),.data_i(csr_clint_data_o),.csr_mtvec(csr_clint_csr_mtvec),.csr_mepc(csr_clint_csr_mepc),.csr_mstatus(csr_clint_csr_mstatus),.we_o(clint_we_o),.waddr_o(clint_waddr_o),.raddr_o(clint_raddr_o),.data_o(clint_data_o),.hold_flag_o(clint_hold_flag_o),.global_int_en_i(csr_global_int_en_o),.int_addr_o(clint_int_addr_o),.int_assert_o(clint_int_assert_o));
 
 ```
+<div align="center"><img src="https://github.com/Yunshui-Bai/RISC-V-CPU/assets/141251120/ce040f21-454c-40c4-9741-490e138b96af"  width="100%"></img><br><div align="center">结构框图(详看大图)</div></div>
+<br>
+
 
 
 ---
@@ -154,10 +157,8 @@ tinyriscv_soc_top.v 结构分析
 
 
 
-
-
 ```
-<div align="center"><img src="https://user-images.githubusercontent.com/41823230/177723406-e3e15e1c-9ad9-4fa2-b6d7-e6655300a38a.png"  width="50%"></img><br><div align="center">原理图(详看大图)</div></div>
+<div align="center"><img src="https://github.com/Yunshui-Bai/RISC-V-CPU/assets/141251120/c194588c-9798-4263-a08c-7fd3e429bef2"  width="100%"></img><br><div align="center">原理图(详看大图)</div></div>
 <br>
 
 
