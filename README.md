@@ -82,7 +82,6 @@ module tinyriscv(
 
 ---
 tinyriscv_soc_top.v 结构分析
-<div align="center"><img src="https://github.com/Yunshui-Bai/RISC-V-CPU/assets/141251120/6ea795f5-6619-496d-a778-3cabd99d9f42"  width="100%"></img><br><div align="center">原理图(详看大图)</div></div><br>
 ```
 // tinyriscv soc顶层模块 - 内核连接外设
     // tinyriscv处理器核模块例化
