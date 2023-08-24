@@ -2,7 +2,7 @@
 `include "uvm_macros.svh"
 
 import uvm_pkg::*;
-`include "pc_reg.v"
+`include "rib.v"
 `include "my_if.sv"
 `include "my_transaction.sv"
 `include "my_sequencer.sv"
@@ -28,68 +28,147 @@ my_if input_if(clk, rst_n);
 my_if output_if(clk, rst_n);
 
 
+rib dut(.clk(clk),
+		.rst(rst_n),
+		.m0_addr_i(input_if.m0_addr_i),
+        .m1_addr_i(input_if.m1_addr_i),
+        .m2_addr_i(input_if.m2_addr_i),
+        .m3_addr_i(input_if.m3_addr_i),
+        .m0_data_i(input_if.m0_data_i),
+        .m1_data_i(input_if.m1_data_i),
+        .m2_data_i(input_if.m2_data_i),
+        .m3_data_i(input_if.m3_data_i),
+        .m0_data_o(output_if.m0_data_o),
+        .m1_data_o(output_if.m1_data_o),
+        .m2_data_o(output_if.m2_data_o),
+        .m3_data_o(output_if.m3_data_o),
+        .m0_req_i(input_if.m0_req_i),
+        .m1_req_i(input_if.m1_req_i),
+        .m2_req_i(input_if.m2_req_i),
+        .m3_req_i(input_if.m3_req_i),
+        .m0_we_i(input_if.m0_we_i),
+        .m1_we_i(input_if.m1_we_i),
+        .m2_we_i(input_if.m2_we_i),
+        .m3_we_i(input_if.m3_we_i),
+		.s0_we_o(output_if.s0_we_o),
+		.s1_we_o(output_if.s1_we_o),
+		.s2_we_o(output_if.s2_we_o),
+		.s3_we_o(output_if.s3_we_o),
+		.s4_we_o(output_if.s4_we_o),
+		.s5_we_o(output_if.s5_we_o),
+		.s0_data_o(output_if.s0_data_o),
+		.s1_data_o(output_if.s1_data_o),
+		.s2_data_o(output_if.s2_data_o),
+		.s3_data_o(output_if.s3_data_o),
+		.s4_data_o(output_if.s4_data_o),
+		.s5_data_o(output_if.s5_data_o),
+		.s0_addr_o(output_if.s0_addr_o),
+		.s1_addr_o(output_if.s1_addr_o),
+		.s2_addr_o(output_if.s2_addr_o),
+		.s3_addr_o(output_if.s3_addr_o),
+		.s4_addr_o(output_if.s4_addr_o),
+		.s5_addr_o(output_if.s5_addr_o),
+		.s0_data_i(input_if.s0_data_i),
+		.s1_data_i(input_if.s1_data_i),
+		.s2_data_i(input_if.s2_data_i),
+		.s3_data_i(input_if.s3_data_i),
+		.s4_data_i(input_if.s4_data_i),
+		.s5_data_i(input_if.s5_data_i),
+		.hold_flag_o(output_if.hold_flag_o)
+	);
 
-pc_reg  dut(.clk(clk),
-            .rst(rst_n),
-            .jump_flag_i(input_if.load),    // 跳转标志
-            .jump_addr_i(input_if.data),   // 跳转地址32
-            .hold_flag_i(input_if.hold), // 流水线暂停标志 3
-            .jtag_reset_flag_i(1'b0),           // 复位标志
-            .pc_o(output_if.data)           // PC指针
+    
+covergroup master_0 @(posedge clk);
+	m0_we : coverpoint input_if.m0_we_i{
+      bins even  = {0};
+      bins odd   = {1};
+    }
+	m0_req : coverpoint input_if.m0_req_i{
+      bins even  = {0};
+      bins odd   = {1};
+    }
+	m0_addr : coverpoint input_if.m0_addr_i[31:28]{
+	  bins slave_0 = {4'b0000};
+	  bins slave_1 = {4'b0001};
+	  bins slave_2 = {4'b0010};
+	  bins slave_3 = {4'b0011};
+	  bins slave_4 = {4'b0100};
+	  bins slave_5 = {4'b0101};
+	  }
+	m0: cross m0_we, m0_req, m0_addr{
+	ignore_bins zero = binsof(m0_req.even);
+	}
+  endgroup
+  
+covergroup master_1 @(posedge clk);
+	m1_we : coverpoint input_if.m1_we_i{
+      bins even  = {0};
+      bins odd   = {1};
+    }
+	m1_req : coverpoint input_if.m1_req_i{
+      bins even  = {0};
+      bins odd   = {1};
+    }
+	m1_addr : coverpoint input_if.m1_addr_i[31:28]{
+	  bins slave_0 = {4'b0000};
+	  bins slave_1 = {4'b0001};
+	  bins slave_2 = {4'b0010};
+	  bins slave_3 = {4'b0011};
+	  bins slave_4 = {4'b0100};
+	  bins slave_5 = {4'b0101};
+	  }
+	m1: cross m1_we, m1_req, m1_addr{
+	ignore_bins zero = binsof(m1_req.even);
+	}
+endgroup
 
-    );
-    
-        // master 0 interface
-    input wire[`MemAddrBus] m0_addr_i,     // 主设备0读、写地址
-    input wire[`MemBus] m0_data_i,         // 主设备0写数据
-    output reg[`MemBus] m0_data_o,         // 主设备0读取到的数据
-    input wire m0_req_i,                   // 主设备0访问请求标志
-    input wire m0_we_i,                    // 主设备0写标志
-    input wire[`MemAddrBus] m1_addr_i,     // 主设备1读、写地址
-    input wire[`MemBus] m1_data_i,         // 主设备1写数据
-    output reg[`MemBus] m1_data_o,         // 主设备1读取到的数据
-    input wire m1_req_i,                   // 主设备1访问请求标志
-    input wire m1_we_i,                    // 主设备1写标志
-    input wire[`MemAddrBus] m2_addr_i,     // 主设备2读、写地址
-    input wire[`MemBus] m2_data_i,         // 主设备2写数据
-    output reg[`MemBus] m2_data_o,         // 主设备2读取到的数据
-    input wire m2_req_i,                   // 主设备2访问请求标志
-    input wire m2_we_i,                    // 主设备2写标志
-    input wire[`MemAddrBus] m3_addr_i,     // 主设备3读、写地址
-    input wire[`MemBus] m3_data_i,         // 主设备3写数据
-    output reg[`MemBus] m3_data_o,         // 主设备3读取到的数据
-    input wire m3_req_i,                   // 主设备3访问请求标志
-    input wire m3_we_i,                    // 主设备3写标志
-    output reg[`MemAddrBus] s0_addr_o,     // 从设备0读、写地址
-    output reg[`MemBus] s0_data_o,         // 从设备0写数据
-    input wire[`MemBus] s0_data_i,         // 从设备0读取到的数据
-    output reg s0_we_o,                    // 从设备0写标志
-    output reg[`MemAddrBus] s1_addr_o,     // 从设备1读、写地址
-    output reg[`MemBus] s1_data_o,         // 从设备1写数据
-    input wire[`MemBus] s1_data_i,         // 从设备1读取到的数据
-    output reg s1_we_o,                    // 从设备1写标志
-    output reg[`MemAddrBus] s2_addr_o,     // 从设备2读、写地址
-    output reg[`MemBus] s2_data_o,         // 从设备2写数据
-    input wire[`MemBus] s2_data_i,         // 从设备2读取到的数据
-    output reg s2_we_o,                    // 从设备2写标志
-    output reg[`MemAddrBus] s3_addr_o,     // 从设备3读、写地址
-    output reg[`MemBus] s3_data_o,         // 从设备3写数据
-    input wire[`MemBus] s3_data_i,         // 从设备3读取到的数据
-    output reg s3_we_o,                    // 从设备3写标志
-    output reg[`MemAddrBus] s4_addr_o,     // 从设备4读、写地址
-    output reg[`MemBus] s4_data_o,         // 从设备4写数据
-    input wire[`MemBus] s4_data_i,         // 从设备4读取到的数据
-    output reg s4_we_o,                    // 从设备4写标志
-    output reg[`MemAddrBus] s5_addr_o,     // 从设备5读、写地址
-    output reg[`MemBus] s5_data_o,         // 从设备5写数据
-    input wire[`MemBus] s5_data_i,         // 从设备5读取到的数据
-    output reg s5_we_o,                    // 从设备5写标志
+covergroup master_2 @(posedge clk);
+	m2_we : coverpoint input_if.m2_we_i{
+      bins even  = {0};
+      bins odd   = {1};
+    }
+	m2_req : coverpoint input_if.m2_req_i{
+      bins even  = {0};
+      bins odd   = {1};
+    }
+	m2_addr : coverpoint input_if.m2_addr_i[31:28]{
+	  bins slave_0 = {4'b0000};
+	  bins slave_1 = {4'b0001};
+	  bins slave_2 = {4'b0010};
+	  bins slave_3 = {4'b0011};
+	  bins slave_4 = {4'b0100};
+	  bins slave_5 = {4'b0101};
+	  }
+	m2: cross m2_we, m2_req, m2_addr{
+	ignore_bins zero = binsof(m2_req.even);
+	}
+endgroup
 
-    output reg hold_flag_o                 // 暂停流水线标志
-    
-    
-covergroup cov_counter @(posedge clk);
-    addr : coverpoint input_if.data {
+covergroup master_3 @(posedge clk);
+	m3_we : coverpoint input_if.m3_we_i{
+      bins even  = {0};
+      bins odd   = {1};
+    }
+	m3_req : coverpoint input_if.m3_req_i{
+      bins even  = {0};
+      bins odd   = {1};
+    }
+	m3_addr : coverpoint input_if.m3_addr_i[31:28]{
+	  bins slave_0 = {4'b0000};
+	  bins slave_1 = {4'b0001};
+	  bins slave_2 = {4'b0010};
+	  bins slave_3 = {4'b0011};
+	  bins slave_4 = {4'b0100};
+	  bins slave_5 = {4'b0101};
+	  }
+	m3: cross m3_we, m3_req, m3_addr{
+	ignore_bins zero = binsof(m3_req.even);
+	}
+endgroup
+
+
+	
+    /*s0_we : coverpoint input_if.s0_we_o {
       bins all    = {32'b0,32'hffff_ffff};
       //bins high   = {13'b1_0000_0000_0000,13'b1_1111_1111_1111};
     }
@@ -104,9 +183,15 @@ covergroup cov_counter @(posedge clk);
     rst  : coverpoint rst_n{
       bins one ={1};
       bins zero = {0};
-    }
-  endgroup
-cov_counter cov_count = new();
+    } */
+
+  
+//cov_counter cov_count = new();
+master_0 cov_0 = new();
+master_1 cov_1 = new();
+master_2 cov_2 = new();
+master_3 cov_3 = new();
+
 initial begin
    clk = 0;
    forever begin
@@ -129,5 +214,14 @@ initial begin
    uvm_config_db#(virtual my_if)::set(null, "uvm_test_top.env.i_agt.mon", "vif", input_if);
    uvm_config_db#(virtual my_if)::set(null, "uvm_test_top.env.o_agt.mon", "vif", output_if);
 end
+
+`ifdef FSDB
+initial begin
+	$fsdbDumpfile("top_tb.fsdb");  //产生波形的名字
+	$fsdbDumpvars(0, top_tb);       //testbench的名字       
+	$fsdbDumpSVA();
+	$fsdbDumpMDA();  
+end
+`endif
 
 endmodule

@@ -13,7 +13,7 @@ class case1_sequence extends uvm_sequence #(my_transaction);
       if(starting_phase != null) 
          starting_phase.raise_objection(this);
       repeat (1) begin
-         `uvm_do_with(m_trans, { m_trans.data.size() == 1500;})
+         `uvm_do_with(m_trans, { m_trans.m0_addr_i.size() == 1500;})
          `uvm_info("case1_sequence","uvm done",UVM_LOW);
       end
       #100;

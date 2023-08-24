@@ -37,7 +37,23 @@ task my_scoreboard::main_phase(uvm_phase phase);
          `uvm_info("my_scoreboard", "get one transaction from dut", UVM_LOW)
          if(expect_queue.size() > 0) begin
             tmp_tran = expect_queue.pop_front();
-            result = get_actual.data==tmp_tran.data;
+            result = (get_actual.hold_flag_o==tmp_tran.hold_flag_o) && 
+			         (get_actual.s0_data_o==tmp_tran.s0_data_o) && 
+					 (get_actual.s1_data_o==tmp_tran.s1_data_o) &&
+			         (get_actual.s2_data_o==tmp_tran.s2_data_o) &&
+					 (get_actual.s3_data_o==tmp_tran.s3_data_o) &&
+					 (get_actual.s4_data_o==tmp_tran.s4_data_o) &&
+					 (get_actual.s5_data_o==tmp_tran.s5_data_o) &&
+					 (get_actual.s0_addr_o==tmp_tran.s0_addr_o) &&
+					 (get_actual.s1_addr_o==tmp_tran.s1_addr_o) &&
+					 (get_actual.s2_addr_o==tmp_tran.s2_addr_o) &&
+					 (get_actual.s3_addr_o==tmp_tran.s3_addr_o) &&
+					 (get_actual.s4_addr_o==tmp_tran.s4_addr_o) &&
+					 (get_actual.s5_addr_o==tmp_tran.s5_addr_o) &&
+					 (get_actual.m0_data_o==tmp_tran.m0_data_o) &&
+					 (get_actual.m1_data_o==tmp_tran.m1_data_o) &&
+					 (get_actual.m2_data_o==tmp_tran.m2_data_o) &&
+					 (get_actual.m3_data_o==tmp_tran.m3_data_o);
             if(result) begin 
                `uvm_info("my_scoreboard", "Compare SUCCESSFULLY", UVM_LOW);
                $display("the expect pkt is");

@@ -24,9 +24,28 @@ class my_driver extends uvm_driver#(my_transaction);//参数化 添加参数选�
 endclass
 
 task my_driver::main_phase(uvm_phase phase);
-   vif.data <= 32'b0;
-   vif.load <= 1'b0;
-   vif.hold <= 3'b0;
+   /*vif.m0_addr_i <= 32'b0;
+   vif.m1_addr_i <= 32'b0;
+   vif.m2_addr_i <= 32'b0;
+   vif.m3_addr_i <= 32'b0;
+   vif.m0_data_i <= 32'b0;
+   vif.m1_data_i <= 32'b0;
+   vif.m2_data_i <= 32'b0;
+   vif.m3_data_i <= 32'b0;
+   vif.m0_req_i<= 1'b0;
+   vif.m1_req_i<= 1'b0;
+   vif.m2_req_i<= 1'b0;
+   vif.m3_req_i<= 1'b0;
+   vif.m0_we_i <= 1'b0;
+   vif.m1_we_i <= 1'b0;
+   vif.m2_we_i <= 1'b0;
+   vif.m3_we_i <= 1'b0;
+   vif.s0_data_i<= 32'b0;
+   vif.s1_data_i<= 32'b0;
+   vif.s2_data_i<= 32'b0;
+   vif.s3_data_i<= 32'b0;
+   vif.s4_data_i<= 32'b0;
+   vif.s5_data_i<= 32'b0;*/
    while(!vif.rst_n)
       @(posedge vif.clk);
    while(1) begin
@@ -44,33 +63,112 @@ task my_driver::main_phase(uvm_phase phase);
 endtask
 
 task my_driver::drive_one_pkt(my_transaction tr);
-   logic [31:0]     data_q[];
-   logic            load[];
-   logic [2:0]      hold[];
+   logic[31:0]    m0_addr_i[];
+   logic[31:0]    m1_addr_i[];
+   logic[31:0]    m2_addr_i[];
+   logic[31:0]    m3_addr_i[];
+   logic[31:0]    m0_data_i[];
+   logic[31:0]    m1_data_i[];
+   logic[31:0]    m2_data_i[];
+   logic[31:0]    m3_data_i[];
+   logic          m0_req_i[];
+   logic          m1_req_i[];
+   logic          m2_req_i[];
+   logic          m3_req_i[];
+   logic          m0_we_i[];
+   logic          m1_we_i[];
+   logic          m2_we_i[];
+   logic          m3_we_i[];
+   logic[31:0]    s0_data_i[];
+   logic[31:0]    s1_data_i[];
+   logic[31:0]    s2_data_i[];
+   logic[31:0]    s3_data_i[];
+   logic[31:0]    s4_data_i[];
+   logic[31:0]    s5_data_i[];
    int  data_size;
-   logic[31:0]   r;
    
-   data_size = tr.data.size; 
-   data_q = new[data_size];
-   load   = new[data_size];
-   hold   = new[data_size];
-   data_q = tr.data;
-   load   = tr.load;
-   hold   = tr.hold;
+   data_size = tr.m0_addr_i.size; 
+
+   m0_addr_i = new[data_size];
+   m1_addr_i = new[data_size];
+   m2_addr_i = new[data_size];
+   m3_addr_i = new[data_size];
+   m0_data_i = new[data_size];
+   m1_data_i = new[data_size];
+   m2_data_i = new[data_size];
+   m3_data_i = new[data_size];
+   m0_req_i = new[data_size];
+   m1_req_i = new[data_size];
+   m2_req_i = new[data_size];
+   m3_req_i = new[data_size];
+   m0_we_i = new[data_size];
+   m1_we_i = new[data_size];
+   m2_we_i = new[data_size];
+   m3_we_i = new[data_size];
+   s0_data_i = new[data_size];
+   s1_data_i = new[data_size];
+   s2_data_i = new[data_size];
+   s3_data_i = new[data_size];
+   s4_data_i = new[data_size];
+   s5_data_i = new[data_size];
+   
+
+   m0_addr_i = tr.m0_addr_i;
+   m1_addr_i = tr.m1_addr_i;
+   m2_addr_i = tr.m2_addr_i;
+   m3_addr_i = tr.m3_addr_i;
+   m0_data_i = tr.m0_data_i;
+   m1_data_i = tr.m1_data_i;
+   m2_data_i = tr.m2_data_i;
+   m3_data_i = tr.m3_data_i;
+   m0_req_i  = tr.m0_req_i;
+   m1_req_i  = tr.m1_req_i;
+   m2_req_i  = tr.m2_req_i;
+   m3_req_i  = tr.m3_req_i;
+   m0_we_i   = tr.m0_we_i;
+   m1_we_i   = tr.m1_we_i;
+   m2_we_i   = tr.m2_we_i;
+   m3_we_i   = tr.m3_we_i;
+   s0_data_i = tr.s0_data_i;
+   s1_data_i = tr.s1_data_i;
+   s2_data_i = tr.s2_data_i;
+   s3_data_i = tr.s3_data_i;
+   s4_data_i = tr.s4_data_i;
+   s5_data_i = tr.s5_data_i;
+   
    `uvm_info("my_driver", "begin to drive one pkt", UVM_LOW);
-   repeat(1) @(posedge vif.clk);
+   //repeat(1) @(posedge vif.clk);
    for ( int i = 0; i < data_size; i++ ) begin
-      @(posedge vif.clk);
+      //@(posedge vif.clk);
       vif.flag <= 1'b1;
-      vif.data <= data_q[i];
-      vif.load <= load[i]; 
-      vif.hold <= hold[i];
-      r= {$random} % 100;
-      vif.ss <=r[0];
+	  vif.m0_addr_i = m0_addr_i[i];
+	  vif.m1_addr_i = m1_addr_i[i];
+	  vif.m2_addr_i = m2_addr_i[i];
+	  vif.m3_addr_i = m3_addr_i[i];
+	  vif.m0_data_i = m0_data_i[i];
+	  vif.m1_data_i = m1_data_i[i];
+	  vif.m2_data_i = m2_data_i[i];
+	  vif.m3_data_i = m3_data_i[i];
+	  vif.m0_req_i  = m0_req_i[i];
+	  vif.m1_req_i  = m1_req_i[i];
+	  vif.m2_req_i  = m2_req_i[i];
+	  vif.m3_req_i  = m3_req_i[i];
+	  vif.m0_we_i   = m0_we_i[i];
+	  vif.m1_we_i   = m1_we_i[i];
+	  vif.m2_we_i   = m2_we_i[i];
+	  vif.m3_we_i   = m3_we_i[i];
+	  vif.s0_data_i = s0_data_i[i];
+	  vif.s1_data_i = s1_data_i[i];
+	  vif.s2_data_i = s2_data_i[i];
+	  vif.s3_data_i = s3_data_i[i];
+	  vif.s4_data_i = s4_data_i[i];
+	  vif.s5_data_i = s5_data_i[i];
+	  @(posedge vif.clk);
       //cov.sample(vif);
    end
-   @(posedge vif.clk);
+   //@(posedge vif.clk);
    vif.flag <= 1'b0;
+   @(posedge vif.clk);
    `uvm_info("my_driver", "end drive one pkt", UVM_LOW);
 endtask
 
