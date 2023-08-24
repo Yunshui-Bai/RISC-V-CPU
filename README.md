@@ -184,7 +184,7 @@ rst，jump，hold，inst addr 均为100%；
 代码覆盖率：![regs coverage1](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/6613e90e-d6a8-4010-b2c9-3ef6fad7feb2)
 功能覆盖率：![regs coverage2](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/22485eb0-5561-4012-a31b-a7f54b923e1b)
 #### div除法模块
-测试了除法模块有符号除法，无符号除法，有符号求余数，无符号求余数四种运算
+测试了除法模块有符号除法，无符号除法，有符号求余数，无符号求余数四种运算   
 测试结果： ` Compare SUCCESSFULLY` ![div verdi](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/aabb122d-c2d6-4465-a246-07d241b07050)
 代码覆盖率：![div coverage](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/67d62e09-44c7-41ed-bf1f-63415ca237c9)
 功能覆盖率：![div coverage2](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/51b4f8cb-66d9-4195-b372-597ab842dc23)
@@ -198,6 +198,19 @@ rst，jump，hold，inst addr 均为100%；
 使用指令生成平台控制指令，仅产生1500条指令便可达到很高的覆盖率(各指令权重均为1)，图中clint覆盖率较低是因为未考虑各种中断，而非指令不全：    
 ![core coverage1](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/7cd039fc-7208-4d30-a6bd-498b97e5d138)
 ![core coverage2](https://github.com/Yunshui-Bai/Yunshui_Bai/assets/141251120/fd3f2fab-0e99-47b4-8630-e233b6e5ae90)
+
+### apb部分
+测试了RIB总线上的各个主设备之间的优先级仲裁机制,验证了主机与从机之间的选择和连接，以及主从机之间的地址传输和数据通信     
+测试结果：` Compare SUCCESSFULLY`![rib_verdi](https://github.com/Yunshui-Bai/RISC-V-CPU/assets/141251120/18ffc8d8-16f1-482e-b183-7368db2911f5)
+代码覆盖率：![rib_cov1](https://github.com/Yunshui-Bai/RISC-V-CPU/assets/141251120/d7e28fe3-c7ba-4fa7-a2ae-9c68118db018)
+功能覆盖率：![rib_cov2 1](https://github.com/Yunshui-Bai/RISC-V-CPU/assets/141251120/c3e58791-0a9d-404e-8876-58b9f173f193)
+![rib_cov2 2](https://github.com/Yunshui-Bai/RISC-V-CPU/assets/141251120/7cc4028f-4ba0-48c8-b2ab-49fc33b52385)
+![rib_cov2 3](https://github.com/Yunshui-Bai/RISC-V-CPU/assets/141251120/34c58779-6da6-4bc1-be6c-340b904d8b57)
+![rib_cov2 4](https://github.com/Yunshui-Bai/RISC-V-CPU/assets/141251120/baad3c7e-3aa1-4ba5-8de0-73c7db999a97)
+
+
+
+
 
 
 
