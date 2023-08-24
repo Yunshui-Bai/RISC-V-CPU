@@ -19,9 +19,8 @@ dve:
 
 verdi:
 	verdi \
-	-f verif.f \                     
-	-nologo \
-	-ssf *.fsdb &                    
+	-sv -ntb_opts uvm-1.1 top_tb.sv \
+	-ssf *.fsdb &                   
 
 clean:
 	@rm -rf csrc DVEfiles simv simv.daidir ucli.key VCS* *.vdb
